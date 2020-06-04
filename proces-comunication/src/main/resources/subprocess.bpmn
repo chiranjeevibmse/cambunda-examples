@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0f534fy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.7.1">
+  <bpmn:process id="idProcessA" name="PorcessA" isExecutable="true">
+    <bpmn:sequenceFlow id="Flow_1uavyk7" sourceRef="idSubProcessStart" targetRef="Activity_1ylhnk7" />
+    <bpmn:startEvent id="idSubProcessStart" name="Start">
+      <bpmn:outgoing>Flow_1uavyk7</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_0ft3tl0" messageRef="Message_0jufayh" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1tngzmj" sourceRef="Activity_1ylhnk7" targetRef="Event_0xn2nke" />
+    <bpmn:serviceTask id="Activity_1ylhnk7" camunda:class="com.chiru.camunda.procescomunication.SubProcessTask">
+      <bpmn:incoming>Flow_1uavyk7</bpmn:incoming>
+      <bpmn:outgoing>Flow_1tngzmj</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:boundaryEvent id="Event_00rx5hl" attachedToRef="Activity_1ylhnk7">
+      <bpmn:outgoing>Flow_1x36ibz</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_0932jb7" errorRef="Error_14aj6w5" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1x36ibz" sourceRef="Event_00rx5hl" targetRef="Event_1bzx6t4" />
+    <bpmn:intermediateThrowEvent id="Event_0xn2nke">
+      <bpmn:incoming>Flow_1tngzmj</bpmn:incoming>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_17m7nad" signalRef="Signal_1rdyvuo" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateThrowEvent id="Event_1bzx6t4">
+      <bpmn:incoming>Flow_1x36ibz</bpmn:incoming>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_08zkskd" signalRef="Signal_0i67orn" />
+    </bpmn:intermediateThrowEvent>
+  </bpmn:process>
+  <bpmn:signal id="Signal_1rdyvuo" name="endOfSubProcess" />
+  <bpmn:message id="Message_0jufayh" name="startSubProcess" />
+  <bpmn:escalation id="Escalation_0ynp5h7" name="SubProcessDone" escalationCode="SubProcessDone" />
+  <bpmn:error id="Error_14aj6w5" name="SubProcessError" errorCode="SubProcessError" />
+  <bpmn:escalation id="Escalation_0rrcymp" name="SubProcessError" escalationCode="SubProcessError" />
+  <bpmn:signal id="Signal_0i67orn" name="errorInSubProcess" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="idProcessA">
+      <bpmndi:BPMNEdge id="Flow_1uavyk7_di" bpmnElement="Flow_1uavyk7">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="260" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1tngzmj_di" bpmnElement="Flow_1tngzmj">
+        <di:waypoint x="360" y="120" />
+        <di:waypoint x="442" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1x36ibz_di" bpmnElement="Flow_1x36ibz">
+        <di:waypoint x="310" y="178" />
+        <di:waypoint x="310" y="240" />
+        <di:waypoint x="382" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1gsgtz9_di" bpmnElement="idSubProcessStart">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="145" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1amgkbi_di" bpmnElement="Activity_1ylhnk7">
+        <dc:Bounds x="260" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vrsgcx_di" bpmnElement="Event_0xn2nke">
+        <dc:Bounds x="442" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1mq09vt_di" bpmnElement="Event_1bzx6t4">
+        <dc:Bounds x="382" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_009jhjg_di" bpmnElement="Event_00rx5hl">
+        <dc:Bounds x="292" y="142" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
