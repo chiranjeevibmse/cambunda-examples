@@ -1,0 +1,10 @@
+spring:
+   datasource:
+      url: jdbc:postgresql://localhost:5432/processflow
+      platform: postgres
+      username: postgres
+      password: root
+
+camunda.bpm.admin-user:
+  id: admin
+  password: admin
