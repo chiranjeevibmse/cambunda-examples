@@ -1,10 +1,22 @@
 spring:
+   main:
+      allow-bean-definition-overriding: true
    datasource:
-      url: jdbc:postgresql://localhost:5432/processflow
       platform: postgres
+      url: jdbc:postgresql://localhost:5432/processflow
       username: postgres
       password: root
-
-camunda.bpm.admin-user:
-  id: admin
-  password: admin
+      driverClassName: org.postgresql.Driver
+      initialization-mode: always
+   jpa:
+      database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+      hibernate:
+         ddl-auto: create
+      properties:
+         hibernate.temp.use_jdbc_metadata_defaults: false  
+      show-sql: false
+camunda:
+   bpm:
+      admin-user:
+         id: admin
+         password: admin
