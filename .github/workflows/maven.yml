@@ -21,6 +21,6 @@ jobs:
       with:
         java-version: 11
     - name: Build camunda-prostgresdb with Maven
-      run: mvn -f camunda-prostgresdb -B package
+      run: mvn -f camunda-prostgresdb package
     - name: Build proces-comunication with Maven
-      run: mvn -f proces-comunication -B package
+      run: mvn -f proces-comunication package
